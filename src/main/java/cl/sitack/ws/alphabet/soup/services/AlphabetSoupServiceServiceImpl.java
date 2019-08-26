@@ -1,7 +1,6 @@
 package cl.sitack.ws.alphabet.soup.services;
 
 import cl.sitack.ws.alphabet.soup.dto.ConfiguracionSoupDTO;
-
 import cl.sitack.ws.alphabet.soup.mongo.crud.exceptions.*;
 import cl.sitack.ws.alphabet.soup.mongo.crud.resource.IdResource;
 import cl.sitack.ws.alphabet.soup.mongo.crud.service.MongoCRUDServiceAbstract;
@@ -28,7 +27,6 @@ public class AlphabetSoupServiceServiceImpl extends MongoCRUDServiceAbstract<Con
     private ConfiguracionSoupDTO configuracionSoupDTO;
     private List<String> resultadoPalabras = new ArrayList<>();
     private List<String> palabrasEncontradas = new ArrayList<>();
-
     @Autowired
     private SoupRepository mongoRepository;
     @Autowired
@@ -60,7 +58,6 @@ public class AlphabetSoupServiceServiceImpl extends MongoCRUDServiceAbstract<Con
         while (7>resultadoPalabras.size()){
             int numRandomSel = (int) Math.round(Math.random() * 20);
             String seleccionada = palabrasSopa[numRandomSel];
-
             if (!resultadoPalabras.contains(seleccionada)) {
                 resultadoPalabras.add(seleccionada);
             }
@@ -68,17 +65,18 @@ public class AlphabetSoupServiceServiceImpl extends MongoCRUDServiceAbstract<Con
 
         //TODO recorrer todos los seleccionados y agregar a la matriz de la sopa
         int inicioIzqADer = 0;
+        boolean seteoIzqDer = false;
         for (int palabras=0;palabras<resultadoPalabras.size();palabras++){
-            if (configuracionSoupDTO.isLtr()) {//palabras de izquerda a derrecha
+            if (configuracionSoupDTO.isLtr() == !seteoIzqDer) {//palabras de izquerda a derrecha
                 char sel[] = resultadoPalabras.get(0).toCharArray();
                 int columna = (int) Math.round(Math.random() * (configuracionSoupDTO.getH()-1));
                 int inicioMaximo = configuracionSoupDTO.getW() - (sel.length-1);
                 int inicioReal = (int) Math.round(Math.random() * inicioMaximo);
-//                for (int a = 0; a < sel.length; a++) {
-
-                for (int a = inicioReal; a < (inicioReal+(sel.length-1)); a++) {
-                    sopa[columna][a] = sel[inicioIzqADer];
-                    inicioIzqADer= inicioIzqADer+1;
+                for (int a = inicioReal; a < (inicioReal+(sel.length)); a++) {
+                    if (inicioIzqADer < sel.length){
+                        sopa[columna][a] = sel[inicioIzqADer];
+                        inicioIzqADer= inicioIzqADer+1;
+                    }
                 }
             }
 
