@@ -65,11 +65,18 @@ public class AlphabetSoupServiceServiceImpl extends MongoCRUDServiceAbstract<Con
 
         //TODO recorrer todos los seleccionados y agregar a la matriz de la sopa
         int inicioIzqADer = 0;
-        boolean seteoIzqDer = false;
+        //boolean seteoIzqDer = false;
+        int columnaOcupadaIzqDer = -1;
+
+        int inicioDerAIzq = 0;
+        //boolean seteoDerIzq =false;
+        int columnaOcupadaDerIzq = -1;
+
         for (int palabras=0;palabras<resultadoPalabras.size();palabras++){
-            if (configuracionSoupDTO.isLtr() == !seteoIzqDer) {//palabras de izquerda a derrecha
+            if (configuracionSoupDTO.isLtr()) {//palabras de izquerda a derrecha
                 char sel[] = resultadoPalabras.get(0).toCharArray();
                 int columna = (int) Math.round(Math.random() * (configuracionSoupDTO.getH()-1));
+                columnaOcupadaIzqDer = columna;
                 int inicioMaximo = configuracionSoupDTO.getW() - (sel.length-1);
                 int inicioReal = (int) Math.round(Math.random() * inicioMaximo);
                 for (int a = inicioReal; a < (inicioReal+(sel.length)); a++) {
@@ -81,12 +88,23 @@ public class AlphabetSoupServiceServiceImpl extends MongoCRUDServiceAbstract<Con
             }
 
             if (configuracionSoupDTO.isRtl()){//palabras de derrecha a izquerda
-//                char sel[] = resultadoPalabras.get(palabras).toCharArray();
-//                int inicioMaximo = configuracionSoupDTO.getW() - sel.length;
-//                int inicioReal = (int) Math.round(Math.random() * inicioMaximo);
-//                for(int a=sel.length; a < inicioReal; a--) {
-//                    sopa[0][a]=sel[a];
-//                }
+                /*char sel[] = resultadoPalabras.get(1).toCharArray();
+                int columna = (int) Math.round(Math.random() * (configuracionSoupDTO.getH()-1));
+                if (columnaOcupadaIzqDer == columna){
+                    while (columnaOcupadaIzqDer == columna){
+                        columna = (int) Math.round(Math.random() * (configuracionSoupDTO.getH()-1));
+                    }
+                }
+                columnaOcupadaDerIzq = columna;
+                int inicioMaximo = configuracionSoupDTO.getW() - (sel.length-1);
+                int inicioReal = (int) Math.round(Math.random() * inicioMaximo);
+                for (int a = (inicioReal+(sel.length)); a < inicioReal; a--) {
+                    if (inicioDerAIzq < sel.length){
+                        sopa[columna][a] = sel[inicioDerAIzq];
+                        inicioDerAIzq= inicioDerAIzq+1;
+                    }
+                }*/
+
             }
 
             if (configuracionSoupDTO.isBtt()){//palabras de abajo hacia arriba

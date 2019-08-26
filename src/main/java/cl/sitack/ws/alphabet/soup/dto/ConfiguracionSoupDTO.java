@@ -1,16 +1,23 @@
 package cl.sitack.ws.alphabet.soup.dto;
 
+import org.springframework.beans.factory.annotation.Value;
+
+import javax.ws.rs.DefaultValue;
+
 public class ConfiguracionSoupDTO {
+    @DefaultValue("15")
     private int w; // ancho de la sopa de letras
-    private int h=15; // largo de la sopa de letras
+    @DefaultValue("15")
+    private int h; // largo de la sopa de letras
+    @DefaultValue("true")
     private boolean ltr;
-    //@Value("false")
+    @DefaultValue("false")
     private boolean rtl;
-    //@Value("true")
+    @DefaultValue("true")
     private boolean ttb;
-    //@DefaultValue("false")
+    @DefaultValue("false")
     private boolean btt;
-    //@DefaultValue("false")
+    @DefaultValue("false")
     private boolean d;
 
     public int getW() {
