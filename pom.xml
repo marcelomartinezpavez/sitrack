@@ -72,7 +72,7 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>2.4.10</version> <!-- 2.4.11 didn't work for me -->
+            <version>2.4.21</version> <!-- 2.4.11 didn't work for me -->
             <scope>test</scope>
         </dependency>
 
